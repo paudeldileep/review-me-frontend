@@ -13,7 +13,7 @@ import { Index } from './pages/Index';
 function App() {
   return (
     <Router>
-    <div className="App">
+    <div className=" min-h-screen w-full">
      <Switch>
        <Route exact path="/" component={Index}/>
        <PrivateRoute exact path="/dashboard" component={DashBoard}/>
