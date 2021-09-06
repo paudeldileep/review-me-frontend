@@ -1,14 +1,16 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import axios from '../utils/axios'
 
 const initialState = {
   data:null,
   status: "idle",
   error: null,
-  fetchedUsers:null
 };
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+export const fetchUserData = createAsyncThunk('user/fetchUserData', async () => {
+
+
+    const response = await axios.get('/auth')
     const data = await response.json()
     //console.log('data:', data)
     return data
@@ -34,14 +36,14 @@ const userSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchUser.pending, (state, action) => {
+      .addCase(fetchUserData.pending, (state, action) => {
         state.status = 'loading'
       })
-      .addCase(fetchUser.rejected, (state, action) => {
+      .addCase(fetchUserData.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
       })
-      .addCase(fetchUser.fulfilled, (state, action) => {
+      .addCase(fetchUserData.fulfilled, (state, action) => {
         state.fetchedUsers = action.payload
         state.status = 'fulfilled'
       })

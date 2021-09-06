@@ -8,7 +8,7 @@ const NewProductForm = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-  const [fileError, setFileError] = useState(null);
+  // const [fileError, setFileError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ const NewProductForm = () => {
             id="productImage"
             onChange={(e) => setFile(e.target.files[0])}
           />
-          {fileError}
+          
           <button className="border border-blue-500">Post</button>
         </form>
       </div>
