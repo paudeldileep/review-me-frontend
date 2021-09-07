@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { useState } from "react";
 
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
-const LogIn=()=>{
-    return(<div className="h-screen w-full bg-purple-blob bg-center bg-no-repeat flex justify-center items-center">
-            <div className="login_form rounded-md w-96 min-w-min max-w-screen-md h-3/4 bg-gray-50 backdrop-filter backdrop-blur-lg bg-opacity-20">
-                <h2 className="text-center font-mono text-3xl font-bold tracking-tighter mt-2 text-purple-900">Welcome Back</h2>
-                <h4 className="ml-4 text-gray-600 sm:text-purple-200 text-lg mt-12 mb-1">Sign In to Continue</h4>
-                <div>
-                    <form className="flex flex-col mx-4">
-                        <input className="border-b-2 focus:outline-none focus:border-purple-800 p-1 my-2 bg-transparent placeholder-purple-100 text-purple-100 text-xl" type="email" placeholder="Email"/>
-                        <input className="border-b-2 focus:outline-none focus:border-purple-800 p-1 my-2 bg-transparent placeholder-purple-100 text-purple-100 text-xl" type="password" placeholder="Password"/>
-                        <div className="flex justify-between items-center my-2 mx-2">
-                            <div><label><input type="checkbox"/> <span>Remember me</span></label></div>
-                            <p className="cursor-pointer">Forgot Password ?</p>
-                        </div>
-                        <button className="p-2 text-xl border border-purple-100 bg-purple-500 focus:bg-purple-700 focus:shadow-md rounded-md w-11/12 self-center mt-4">Sign In</button>
-                    </form>
-                </div>
-                <h4 className="text-center font-mono text-purple-100 mt-12">New Explorer? <span className="cursor-pointer text-lg text-gray-800">Sign Up</span> </h4>
-            </div>
-    </div>)
-}
+const LogIn = ({ isAuthenticated }) => {
+  const [isSignIn, setIsSignIn] = useState(true);
 
+  const handleFormSwitch = () => {
+    setIsSignIn(!isSignIn);
+  };
 
+  let content = isSignIn ? (
+    <SignIn onFormChange={handleFormSwitch} />
+  ) : (
+    <SignUp onFormChange={handleFormSwitch} />
+  );
+
+  return (
+    <div className="h-screen w-full bg-purple-blob bg-center bg-no-repeat flex justify-center items-center">
+      {content}
+    </div>
+  );
+};
 
 export default LogIn;
