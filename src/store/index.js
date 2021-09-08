@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../redux/userSlice";
-import postReducer from '../redux/postSlice'
+import productReducer from '../redux/productSlice'
 
 export default configureStore({
     reducer:{
         user:userReducer,
-        posts:postReducer
+        products:productReducer
     }
 })
