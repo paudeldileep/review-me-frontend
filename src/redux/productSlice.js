@@ -11,6 +11,9 @@ const initialState={
     ownProducts_error:null,
     featuredProducts_status:'empty',
     featuredProducts_error:null,
+    loading:'false',
+    productPosted_status:null,
+    productPosted_error:null
 }
 
 export const fetchAllProducts = createAsyncThunk('product/fetchAllProducts', async () => {
@@ -31,6 +34,17 @@ export const fetchAllProducts = createAsyncThunk('product/fetchAllProducts', asy
     const response = await axios.get('/product/all')
    // const data = await response.json()
     //console.log('data:', data)
+    return response.data
+  })
+
+  export const postProduct = createAsyncThunk('product/postProduct', async (formData,thunkAPI) => {
+    const response = await axios.post('/product/new',formData)
+   // const data = await response.json()
+    console.log('data:', response.data)
+    if(response.data.message){
+      thunkAPI.dispatch(fetchAllProducts())
+      thunkAPI.dispatch(fetchOwnProducts())
+    }
     return response.data
   })
 
@@ -77,6 +91,19 @@ const productSlice=createSlice({
           .addCase(fetchFeaturedProducts.fulfilled,(state,action)=>{
             state.featuredProducts_status='fulfilled'
             state.featuredProducts=action.payload
+          })
+          .addCase(postProduct.pending,(state,action)=>{
+            state.productPosted_status='loading'
+            
+          })
+          .addCase(postProduct.rejected,(state,action)=>{
+            state.productPosted_status='failed'
+            state.productPosted_error=action.error.message
+            
+          })
+          .addCase(postProduct.fulfilled,(state,action)=>{
+            state.productPosted_status='fulfilled'
+            state.productPosted=action.payload
           })
       },
 })

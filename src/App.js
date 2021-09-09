@@ -13,6 +13,7 @@ import PublicRoute from "./components/routing/PublicRoute";
 import LogIn from "./pages/Account";
 import { DashBoard } from "./pages/DashBoard";
 import { Index } from "./pages/Index";
+import SingleProduct from './pages/product/SingleProduct'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" component={Index} />
           <PublicRoute exact path="/login" component={LogIn} />
           <PrivateRoute exact path="/dashboard" component={DashBoard} />
+          <PrivateRoute exact path="/product/:productId" component={SingleProduct} />
           <Route path="*">
             <Redirect to="/" />
           </Route>

@@ -11,7 +11,7 @@ const SignUp=(props)=>{
         e.preventDefault();
 
         if(firstname && lastname && email && password){
-            //dispatch
+            //dispatch not finished
 
             setFirstname('')
             setLastname('')

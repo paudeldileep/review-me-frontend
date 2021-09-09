@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import PostTile from '../../components/Post/PostTile';
+import ProductTile from '../../components/Post/ProductTile';
 import { allProductsSelector, fetchAllProducts } from '../../redux/productSlice';
 
 export const Index=(props)=>{
@@ -14,7 +14,7 @@ export const Index=(props)=>{
 
     const allPosts=useSelector(allProductsSelector)
 
-    const renderedPosts=allPosts && allPosts.map(post=><PostTile key={post._id} post={post}/>)
+    const renderedPosts=allPosts && allPosts.map(post=><ProductTile key={post._id} post={post}/>)
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 min-h-screen w-full mt-1">

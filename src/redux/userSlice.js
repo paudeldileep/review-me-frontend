@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from '../utils/axios'
+import setAuthToken from "../utils/setAuthToken";
 
 const initialState = {
   userdata:null,
@@ -19,36 +20,40 @@ export const fetchUserData = createAsyncThunk('user/fetchUserData', async () => 
     return response.data
   })
 
-  export const userSignIn = createAsyncThunk('user/userSignIn', async (userData) => {
+  export const userSignIn = createAsyncThunk('user/userSignIn', async (userData,thunkAPI) => {
     const response = await axios.post('/user/login',userData)
     //const data = await response.json()
     console.log('data:', response.data)
+    if(response.data){
+      localStorage.setItem('user_token',response.data)
+      setAuthToken(response.data)
+      thunkAPI.dispatch(fetchUserData())
+    }
     return response.data
   })
 
-  export const userSignUp = createAsyncThunk('user/userSignUp', async (userData) => {
+  export const userSignUp = createAsyncThunk('user/userSignUp', async (userData,thunkAPI) => {
     const response = await axios.post('/user/register',userData)
     //const data = await response.json()
     console.log('data:', response.data)
+    if(response.data){
+      localStorage.setItem('user_token',response.data)
+      setAuthToken(response.data)
+      thunkAPI.dispatch(fetchUserData())
+    }
     return response.data
   })
 
+  
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginUser: {
-      reducer(state, action) {
-        state.data=action.payload;
-      },
-      prepare(name, id) {
-        return {
-          payload: {
-            name,
-            id,
-          },
-        };
-      },
+    signOut(state,action){
+      localStorage.removeItem('user_token');
+      state.isAuthenticated=false
+      state.userdata=null
+      state.userdata_status='idle'
     },
   },
   extraReducers(builder) {
@@ -64,6 +69,7 @@ const userSlice = createSlice({
         state.userdata = action.payload
         state.userdata_status = 'fulfilled'
         state.isAuthenticated=true
+        
       })
       .addCase(userSignIn.pending,(state,action)=>{
         state.signin_status='loading'
@@ -76,7 +82,8 @@ const userSlice = createSlice({
       })
       .addCase(userSignIn.fulfilled,(state,action)=>{
         state.signin_status='fulfilled'  
-        localStorage.setItem('user_token',action.payload)
+        //localStorage.setItem('user_token',action.payload)
+        
       })
       .addCase(userSignUp.pending,(state,action)=>{
         state.signin_status='loading'
@@ -89,12 +96,12 @@ const userSlice = createSlice({
       })
       .addCase(userSignUp.fulfilled,(state,action)=>{
         state.signup_status='fulfilled'
-        localStorage.setItem('user_token',action.payload)
+        //localStorage.setItem('user_token',action.payload)
       })
   },
 });
 
-export const {loginUser} =userSlice.actions
+export const {signOut} =userSlice.actions
 export default userSlice.reducer
 
 //custom slector functions
