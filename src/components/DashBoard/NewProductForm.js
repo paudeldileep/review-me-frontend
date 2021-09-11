@@ -1,21 +1,22 @@
-import React,{ useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { postProduct } from "../../redux/productSlice";
+import React, { useState } from "react";
 import BasicLoader from "../LoadingScreen/BasicLoader";
-//import axios from "../../utils/axios";
+import axios from "../../utils/axios";
 
 
-const NewProductForm = () => {
-  const inputStyle = "focus:outline-none border-2 border-blue-500 mb-3 rounded-md p-1";
+const NewProductForm = (props) => {
 
-  const uploadStatus=useSelector(state=>state.products.productPosted_status)
-
-  const dispatch=useDispatch();
-
+  
+  const inputStyle =
+    "focus:outline-none border-2 border-blue-500 mb-3 rounded-md p-1";
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
+  const[response,setResponse]=useState({
+    isLoading: false,
+    status: null,
+    error: null,
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const NewProductForm = () => {
 
     if (!title || !desc || !file) {
       console.log("errror");
-      setError('*Must include a title,description and image')
+      setError("*Must include a title,description and image");
       return;
     }
 
@@ -32,17 +33,26 @@ const NewProductForm = () => {
     formData.append("description", desc);
     formData.append("productImage", file);
 
-    dispatch(postProduct(formData))
-    setError(null)
+    axios.post('/product/new',formData).then(res=>
+        props.onPost()
+    ).catch(err=>{
+      console.log(err);
+      setResponse({...response,isLoading:false,error:err.response?.data?.error})
+    })
+    setError(null);
   };
 
   return (
     <div className="mx-4 px-4 py-2 mb-2 rounded-md bg-gradient-to-r from-purple-400 to-purple-100 relative">
-      {uploadStatus==='loading' && <BasicLoader>Posting....</BasicLoader>}
-      <h3 className="font-mono text-lg font-semibold text-gray-800">Add new Product</h3>
+      {response.isLoading && <BasicLoader>Posting....</BasicLoader>}
+      <h3 className="font-mono text-lg font-semibold text-gray-800">
+        Add new Product
+      </h3>
       <div className="max-w-md w-96">
         <form onSubmit={handleSubmit} className="flex flex-col">
-          <label className="font-mono text-gray-600" htmlFor="title">Title</label>
+          <label className="font-mono text-gray-600" htmlFor="title">
+            Title
+          </label>
           <input
             className={inputStyle}
             type="text"
@@ -50,15 +60,18 @@ const NewProductForm = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <label className="font-mono text-gray-600" htmlFor="desc">Desciption</label>
+          <label className="font-mono text-gray-600" htmlFor="desc">
+            Desciption
+          </label>
           <textarea
             className={inputStyle}
-            
             id="desc"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
-          <label className="font-mono text-gray-600" htmlFor="productImage">Image</label>
+          <label className="font-mono text-gray-600" htmlFor="productImage">
+            Image
+          </label>
           <input
             className="mb-3"
             type="file"
@@ -67,8 +80,9 @@ const NewProductForm = () => {
             onChange={(e) => setFile(e.target.files[0])}
           />
           {error && <p className="font-mono text-red-600 my-1">{error}</p>}
-          <button className="border border-gray-500 bg-purple-400 focus:bg-purple-500 text-gray-100 font-mono text-lg rounded-md h-9">Post</button>
-          
+          <button className="border border-gray-500 bg-purple-400 focus:bg-purple-500 text-gray-100 font-mono text-lg rounded-md h-9">
+            Post
+          </button>
         </form>
       </div>
     </div>

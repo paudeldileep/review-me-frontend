@@ -6,7 +6,11 @@ module.exports = {
       backgroundImage: theme => ({
        'purple-blob': "url('svgs/blob.svg')",
        
-      })
+      }),
+      transitionProperty: {
+        'visibility': 'visibility',
+        
+       }
     }
   },
   variants: {

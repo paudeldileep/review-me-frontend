@@ -1,21 +1,24 @@
 import { useState } from "react";
 import axios from "./axios";
 
-export function useAPI(url) {
+export function usePostAPI(url,formData) {
   const [response, setResponse] = useState({
     isLoading: false,
     data: null,
     error: null,
   });
 
-  const fetchData = async () => {
+  const postData = async () => {
+      if(!url || !formData){
+        return
+      }
     setResponse({
       ...response,
       isLoading: true,
     });
    
-      axios.get(url).then((res) => {
-        console.log("res", res);
+      axios.post(url,formData).then((res) => {
+        //console.log("res", res);
         setResponse({
           ...response,
           isLoading: false,
@@ -29,5 +32,5 @@ export function useAPI(url) {
     
   };
 
-  return [response, fetchData];
+  return [response, postData];
 }

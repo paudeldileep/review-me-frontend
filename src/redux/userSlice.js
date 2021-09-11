@@ -21,6 +21,7 @@ export const fetchUserData = createAsyncThunk('user/fetchUserData', async () => 
   })
 
   export const userSignIn = createAsyncThunk('user/userSignIn', async (userData,thunkAPI) => {
+    try{
     const response = await axios.post('/user/login',userData)
     //const data = await response.json()
     console.log('data:', response.data)
@@ -29,12 +30,17 @@ export const fetchUserData = createAsyncThunk('user/fetchUserData', async () => 
       setAuthToken(response.data)
       thunkAPI.dispatch(fetchUserData())
     }
-    return response.data
+    
+    return response.data}
+    catch(err){
+      return err.response.data
+    }
   })
 
   export const userSignUp = createAsyncThunk('user/userSignUp', async (userData,thunkAPI) => {
     const response = await axios.post('/user/register',userData)
     //const data = await response.json()
+    console.log(response)
     console.log('data:', response.data)
     if(response.data){
       localStorage.setItem('user_token',response.data)
@@ -73,6 +79,7 @@ const userSlice = createSlice({
       })
       .addCase(userSignIn.pending,(state,action)=>{
         state.signin_status='loading'
+        state.signin_error=null
 
       })
       .addCase(userSignIn.rejected,(state,action)=>{
@@ -83,10 +90,14 @@ const userSlice = createSlice({
       .addCase(userSignIn.fulfilled,(state,action)=>{
         state.signin_status='fulfilled'  
         //localStorage.setItem('user_token',action.payload)
+        state.signin_error=null
+        if(action.payload.error){
+          state.signin_error=action.payload.error.message
+        }
         
       })
       .addCase(userSignUp.pending,(state,action)=>{
-        state.signin_status='loading'
+        state.signup_status='loading'
         
       })
       .addCase(userSignUp.rejected,(state,action)=>{
@@ -97,6 +108,9 @@ const userSlice = createSlice({
       .addCase(userSignUp.fulfilled,(state,action)=>{
         state.signup_status='fulfilled'
         //localStorage.setItem('user_token',action.payload)
+        if(action.payload.error){
+          state.signup_error=action.payload.error.message
+        }
       })
   },
 });
