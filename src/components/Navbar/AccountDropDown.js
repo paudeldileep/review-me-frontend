@@ -2,7 +2,7 @@ import { CogIcon, LogoutIcon, UserCircleIcon } from '@heroicons/react/outline';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData, signOut } from '../../redux/userSlice';
+import { selectUserData, userSignOut } from '../../redux/userSlice';
 
 const AccountDropDown=()=>{
 
@@ -14,7 +14,7 @@ const AccountDropDown=()=>{
     const [isVisible,setIsVisible]=useState(false)
     const handleVisibility=()=>setIsVisible(!isVisible)
 
-    const handleSignOut=()=>dispatch(signOut())
+    const handleSignOut=()=>dispatch(userSignOut())
 
     //custom drop down menu style
     const dropDownStyle= classNames({'opacity-0 invisible absolute right-0 transform transition-all duration-500 ease-in-out ':!isVisible, 'opacity-100 z-10 visible absolute right-0 transform translate-y-5 -translate-x-2 shadow-md rounded-md py-1 px-2 w-40 transition-all duration-500 ease-in-out':isVisible})

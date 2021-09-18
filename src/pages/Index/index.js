@@ -27,13 +27,15 @@ export const Index = (props) => {
       <div className="md:col-span-3 pt-2 p-2 rounded-md">
         {response.error ? (
           <p className="text-lg text-purple-600 font-mono">
-            {response.error.data.error} !
+            {response.error.data.errors} !
           </p>
         ) : (
-          renderedPosts
+          <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 xl:grid-cols-3">
+          {renderedPosts}
+          </div>
         )}
       </div>
-      <div className="border-2 border-purple-400 pt-2 p-2 rounded-md"></div>
+      <div className=" pt-2 p-2 rounded-md"></div>
     </div>
   );
 };

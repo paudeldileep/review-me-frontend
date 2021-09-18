@@ -32,11 +32,11 @@ export const DashBoard = (props) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 min-h-screen w-full mt-1">
       {/* left sidebar section */}
-      <div className="border-2 border-purple-400 pt-2 rounded-md">
+      <div className=" pt-2 rounded-md">
         <div className="togglePost mx-1 ">
           <button
             type="button"
-            className="rounded-md border border-blue-100 bg-purple-400 focus:bg-purple-700 transition-colors duration-200 px-1 py-1 font-mono h-9 w-24 flex justify-evenly items-center text-gray-50"
+            className="rounded-md border border-blue-100 bg-purple-500 focus:bg-purple-700 transition-colors duration-200 px-1 py-1 font-mono h-9 w-24 flex justify-evenly items-center text-gray-50"
             onClick={handlePostingoggle}
           >
             New
@@ -47,7 +47,7 @@ export const DashBoard = (props) => {
       {/* main content section */}
       <div className="sm:col-span-3 pt-2 rounded-md">
         {isPosting && <NewProductForm onPost={handlePostingoggle}/>}
-        {response.error? <p className="text-lg text-purple-600 font-mono">{response.error.data.error} !</p> : renderedPosts}
+        {response.error ? <p className="text-lg text-purple-600 font-mono">{response.error.data.errors} !</p> :<div className="grid grid-cols-1 gap-1 lg:grid-cols-2 xl:grid-cols-3"> {renderedPosts} </div>}
       </div>
     </div>
   );

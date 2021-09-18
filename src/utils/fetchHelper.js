@@ -15,7 +15,7 @@ export function useAPI(url) {
     });
    
       axios.get(url).then((res) => {
-        console.log("res", res);
+        //console.log("res", res);
         setResponse({
           ...response,
           isLoading: false,

@@ -5,8 +5,8 @@ import { userSignUp } from "../../redux/userSlice";
 
 const SignUp = (props) => {
   //get signup status to show loading screen
-  const signup_status = useSelector((state) => state.user.signup_status);
-  const signup_error = useSelector((state) => state.user.signup_error);
+  const signup_status = useSelector((state) => state.user.status);
+  const signup_error = useSelector((state) => state.user.error);
 
   const dispatch = useDispatch();
   const [firstname, setFirstname] = useState("");

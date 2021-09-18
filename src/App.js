@@ -19,7 +19,7 @@ import SingleProduct from './pages/product/SingleProduct'
 function App() {
   return (
     <Router>
-      <div className="min-h-screen w-full mx-1">
+      <div className="min-h-screen w-full mx-1 bg-gradient-to-br from-gray-100 to-gray-200">
         <Navbar />
         <Switch>
           <Route exact path="/" component={Index} />
