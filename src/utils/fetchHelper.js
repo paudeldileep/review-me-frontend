@@ -9,6 +9,11 @@ export function useAPI(url) {
   });
 
   const fetchData = async () => {
+
+    if(!url){
+      setResponse({ ...response, isLoading: false, error:null })
+      return
+    }
     setResponse({
       ...response,
       isLoading: true,

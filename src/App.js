@@ -15,6 +15,7 @@ import { DashBoard } from "./pages/DashBoard";
 import { Index } from "./pages/Index";
 import EditProduct from "./pages/product/EditProduct";
 import SingleProduct from './pages/product/SingleProduct'
+import UserProfile from "./pages/userProfile";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/" component={Index} />
           <PublicRoute exact path="/login" component={LogIn} />
           <PrivateRoute exact path="/dashboard" component={DashBoard} />
+          <PrivateRoute exact path="/user/:userId" component={UserProfile} />
           <PrivateRoute exact path="/product/:productId" component={SingleProduct} />
           <PrivateRoute exact path="/product/edit/:productId" component={EditProduct} />
           <Route path="*">

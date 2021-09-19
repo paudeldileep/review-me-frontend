@@ -2,6 +2,7 @@ import { CogIcon, LogoutIcon, UserCircleIcon } from '@heroicons/react/outline';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { selectUserData, userSignOut } from '../../redux/userSlice';
 
 const AccountDropDown=()=>{
@@ -25,6 +26,7 @@ const AccountDropDown=()=>{
             </button>
             <nav className={dropDownStyle}>
                 <ul className="divide-y divide-purple-500">
+                <li className="flex justify-start items-center text-xl"><UserCircleIcon className="h-5 w-5 text-purple-500 mr-1"/><Link to={`/user/${user._id}`} className="font-mono text-gray-500">Profile</Link></li>
                     <li className="flex justify-start items-center text-xl"><CogIcon className="h-5 w-5 text-purple-500 mr-1"/><span className="font-mono text-gray-500">Settings</span></li>
                     <li className="text-xl"><button type="button" className="flex justify-start items-center" onClick={handleSignOut}><LogoutIcon className="h-5 w-5 text-red-500 mr-1"/><span className="font-mono text-gray-500">Sign Out</span></button></li>
                 </ul>
