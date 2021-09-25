@@ -120,9 +120,10 @@ export const deleteProduct = (productId) => async (dispatch) => {
 //#2.add new product
 
 //#3.post comment
-export const postReview = (productId) => async (dispatch) => {
+export const postReview = (productId,review) => async (dispatch) => {
+  console.log(review)
   axios
-    .post(`/product/${productId}/review`)
+    .post(`/product/${productId}/review`,review)
     .then((res) => {
       console.log("product review success" + res);
       dispatch(reviewPosted(res.data));

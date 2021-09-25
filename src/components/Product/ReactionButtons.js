@@ -12,7 +12,7 @@ const ReactionButtons=({postId,reviews,likes,hearts})=>{
     const dispatch=useDispatch()
     //const response=useSelector(state=>state.product.response)
     const error=useSelector(state=>state.product.error)
-    const userId=useSelector(state=>state.user.userData._id)
+    const userId=useSelector(state=>state.user.userData?._id)
     const isAuthenticated=useSelector(state=>state.user.isAuthenticated)
     const [isLiked,setIsLiked]=useState(false)
     const [isLoved,setIsLoved]=useState(false)

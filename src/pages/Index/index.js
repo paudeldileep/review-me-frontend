@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import BasicLoader from "../../components/LoadingScreen/BasicLoader";
 
 import ProductTile from "../../components/Product/ProductTile";
@@ -11,6 +12,7 @@ export const Index = (props) => {
   //const dispatch=useDispatch()
   //const[isLoading,data,error]=useFetchRequest(url)
 
+  const isAuthenticated=useSelector(state=>state.user.isAuthenticated);
   const [response, setResponse] = useAPI("/product/all");
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export const Index = (props) => {
       <div className=" pt-2 p-2 rounded-md shadow-md">
         <div className="userlist w-full">
             <h2 className="text-left ml-2 font-mono tracking-tighter text-xl">Personalities</h2>
-            <AllUsers/>
+            {isAuthenticated ?<AllUsers/> : <p>Login..</p>}
         </div>
       </div>
     </div>
