@@ -52,6 +52,12 @@ export default function userReducer(state = initialState, action) {
         isAuthenticated:false
       }
     }
+    case 'user/clearErrors':{
+      return{
+        ...state,
+        error:null
+      }
+    }
     default:
       return state;
   }
@@ -72,6 +78,7 @@ export const userSignedIn = () => ({ type: "user/userSignedIn" });
 export const userSigningUp = () => ({ type: "user/userSigningUp" });
 export const userSignedUp = () => ({ type: "user/userSignedUp" });
 export const userSignOut = () => ({ type: "user/userSignOut" });
+export const clearErrors=()=>({type:"user/clearErrors"})
 
 //Thunk functions
 

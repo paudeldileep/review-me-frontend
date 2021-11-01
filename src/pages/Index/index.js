@@ -31,7 +31,7 @@ export const Index = (props) => {
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 min-h-screen w-full mt-1 py-2 px-2 bg-gray-400">
       <div className="md:col-span-3 pt-2 p-2 rounded-md shadow-md bg-gray-500 border-2 border-gray-300">
         {response.error ? (
-          <p className="text-lg text-purple-600 font-mono">
+          <p className="text-lg text-gray-100 font-mono">
             {response.error.data ? response.error.data.errors : <p className="text-red-500">Something went Wrong! Try Again</p>}
           </p>
         ) : (

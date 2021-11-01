@@ -50,7 +50,7 @@ const NewProductForm = (props) => {
           status:res.data
         });
         props.onPost();
-        props.onPostComplete();
+       // props.onPostComplete();
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +69,7 @@ const NewProductForm = (props) => {
       <h3 className="font-mono text-lg font-semibold text-gray-800 text-center">
         Add new Product
       </h3>
+      <p className="text-xs text-gray-50 text-center my-1"><b className="text-red-700">Note:</b>Once a product is posted, please wait for admin approval before it goes live!</p>
       <div className="max-w-md w-full mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-col">
           <label className="font-mono text-gray-600" htmlFor="title">

@@ -7,8 +7,8 @@ const SignIn = (props) => {
   const dispatch = useDispatch();
 
   //loading sign in status
-  const signin_status = useSelector((state) => state.user.signin_status);
-  const signin_error = useSelector((state) => state.user.signin_error);
+  const signin_status = useSelector((state) => state.user.status);
+  const signin_error = useSelector((state) => state.user.error);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,14 +23,12 @@ const SignIn = (props) => {
       setPassword("");
     }
   };
-
+  const renderErrors=signin_error && signin_error.errors.map(err=><p className="my-1 text-xs text-red-600 font-serif text-center bg-gray-100 p-1">{err.msg}!!</p>)
 
   const canSignIn = Boolean(email) && Boolean(password);
   return (
     <div className="login_form rounded-md border-b-2 border-purple-700 shadow-2xl w-96 min-w-min max-w-screen-md h-3/4 bg-gray-50 backdrop-filter backdrop-blur-lg bg-opacity-20">
-      {signin_error && (
-            <p className="my-1 text-red-600 font-serif text-center">{signin_error}!!</p>
-          )}
+      {signin_error && renderErrors}
       <h2 className="text-center font-mono text-3xl font-bold tracking-tighter mt-2 text-purple-900">
         Welcome Back
       </h2>

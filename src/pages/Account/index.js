@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { clearErrors } from "../../redux/userSlice";
 
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 const LogIn = ({ isAuthenticated }) => {
+  const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState(true);
 
   const handleFormSwitch = () => {
+    dispatch(clearErrors());
     setIsSignIn(!isSignIn);
   };
 

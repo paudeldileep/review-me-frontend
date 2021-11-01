@@ -20,11 +20,13 @@ export const DashBoard = (props) => {
   const handlePostingtoggle = () => {
     setIsPosting(!isPosting);
   };
-  const fetchOnPost = () => {
-    setTimeout(function () {
-      setResponse("/product/own");
-    }, 1000);
-  };
+
+  //was for re-fetching own product after new posting. but not required since admin approval required
+  // const fetchOnPost = () => {
+  //   setTimeout(function () {
+  //     setResponse("/product/own");
+  //   }, 1000);
+  // };
 
   const renderedPosts =
     response.data &&
@@ -53,13 +55,12 @@ export const DashBoard = (props) => {
               {" "}
               <NewProductForm
                 onPost={handlePostingtoggle}
-                onPostComplete={fetchOnPost}
               />
             </div>
           </Fade>
         )}
         {response.error ? (
-          <p className="text-lg text-purple-600 font-mono">
+          <p className="text-lg text-gray-100 font-mono ml-1">
             {response.error.data.errors} !
           </p>
         ) : (

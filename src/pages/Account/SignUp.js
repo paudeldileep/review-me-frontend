@@ -42,11 +42,11 @@ const SignUp = (props) => {
         canSignUp=false
     }
 
+    const renderErrors=signup_error && signup_error.errors.map(err=><p className="my-1 text-red-600 text-xs font-serif text-center bg-gray-100 p-1">{err.msg}!!</p>)
+
   return (
     <div className="signup_form rounded-md w-96 min-w-min max-w-screen-md h-3/4 border-b-2 border-purple-700 shadow-2xl bg-gray-50 backdrop-filter backdrop-blur-lg bg-opacity-20">
-      {signup_error && (
-            <p className="my-1 text-red-600 font-serif text-center">{signup_error.errors}!!</p>
-          )}
+      {signup_error && renderErrors}
       <h2 className="text-center font-mono text-3xl font-bold tracking-tighter mt-2 text-purple-900">
         Welcome Onboard
       </h2>
