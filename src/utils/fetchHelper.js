@@ -28,8 +28,8 @@ export function useAPI(url) {
         });
       }).catch(err=>{
     
-      console.log("err"+err);
-      setResponse({ ...response, isLoading: false, error: err.response });
+      console.log(err);
+      setResponse({ ...response, isLoading: false, error: err.response || err });
     })
     
   };

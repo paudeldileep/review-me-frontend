@@ -24,7 +24,7 @@ const Review = ({ productId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newReview) {
-      console.log(newReview);
+      
       dispatch(postReview(productId, { review: newReview }));
 
       setTimeout(function () {
@@ -55,7 +55,7 @@ const Review = ({ productId }) => {
           {postResponse && <Alert type="success" delay="3000">{postResponse}</Alert>}
         </form>
       </div>
-      <div>
+      <div className="mx-2">
         {response.isLoading && <p>Loading Reviews...</p>}
         {content}
       </div>

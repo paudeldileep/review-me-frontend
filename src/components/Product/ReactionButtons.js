@@ -20,8 +20,8 @@ const ReactionButtons=({postId,reviews,likes,hearts})=>{
     const [heartsNum,setHeartsNum]=useState(hearts.length)
     const [reviewsNum,setReviewsNum]=useState(reviews.length)
 
-    console.log('userid',userId)
-    console.log('isliked',isLiked)
+    // console.log('userid',userId)
+    // console.log('isliked',isLiked)
     //check whether this user liked this post or not
     useEffect(()=>{
         

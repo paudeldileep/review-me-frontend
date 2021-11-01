@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BasicLoader from "../../components/LoadingScreen/BasicLoader";
+import { Link } from "react-router-dom";
 
 import ProductTile from "../../components/Product/ProductTile";
 import AllUsers from "../../components/Users/AllUsers";
@@ -27,11 +28,11 @@ export const Index = (props) => {
   ))
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 min-h-screen w-full mt-1 py-2 px-2">
-      <div className="md:col-span-3 pt-2 p-2 rounded-md shadow-md bg-gray-50">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 min-h-screen w-full mt-1 py-2 px-2 bg-gray-400">
+      <div className="md:col-span-3 pt-2 p-2 rounded-md shadow-md bg-gray-500 border-2 border-gray-300">
         {response.error ? (
           <p className="text-lg text-purple-600 font-mono">
-            {response.error.data.errors} !
+            {response.error.data ? response.error.data.errors : <p className="text-red-500">Something went Wrong! Try Again</p>}
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 xl:grid-cols-3">
@@ -41,10 +42,11 @@ export const Index = (props) => {
           </div>
         )}
       </div>
-      <div className=" pt-2 p-2 rounded-md shadow-md">
+      {/* right div section */}
+      <div className=" pt-2 p-2 rounded-md shadow-md border-2 border-gray-300">
         <div className="userlist w-full">
-            <h2 className="text-left ml-2 font-mono tracking-tighter text-xl">Personalities</h2>
-            {isAuthenticated ?<AllUsers/> : <p>Login..</p>}
+            <h2 className="text-left ml-2 font-mono tracking-tighter text-xl mb-2">Personalities</h2>
+            {isAuthenticated ?<AllUsers/> : <Link to="/login" className="bg-purple-500 rounded-md shadow-sm p-2 mt-2">Login to Continue</Link> }
         </div>
       </div>
     </div>

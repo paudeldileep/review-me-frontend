@@ -12,6 +12,7 @@ import Review from "../../components/Product/Reviews/Review";
 
 import Fade from "react-reveal/Fade";
 import EditProductForm from "./EditProduct";
+import BasicLoader from "../../components/LoadingScreen/BasicLoader";
 
 const SingleProduct = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const SingleProduct = ({ match, history }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const product = useSelector((state) => state.product.singleProduct);
   const error = useSelector((state) => state.product.errors);
+  const[loading,setLoading]=useState(false)
 
   const { productId } = match.params;
 
@@ -44,18 +46,25 @@ const SingleProduct = ({ match, history }) => {
   }
 
   const handleDelete = () => {
+    setLoading(true)
     dispatch(deleteProduct(productId));
-    history.push("/dashboard");
+
+    setTimeout(() => {setLoading(false) 
+      history.push("/dashboard");
+    }, 1000);
+    
   };
 
   return (
     <div className="mt-6 w-full max-w-screen-lg mx-auto min-h-screen relative">
+      {/* delete loading */}
+      {loading && <BasicLoader>Deleting Product</BasicLoader>}
       {/* wrapper */}
       {product ? (
-        <div className="flex flex-col w-11/12 mx-auto shadow-lg rounded-md md:flex-row">
+        <div className="flex flex-col w-11/12 mx-auto shadow-xl rounded-md md:flex-row bg-gray-600 border-2 border-gray-300 p-2">
           {/* product image  */}
 
-          <div className="h-full w-full md:w-1/2 relative">
+          <div className="h-full w-full md:w-1/2 relative text-gray-200">
             <img
               src={product.productImage}
               alt={product.title}
@@ -63,7 +72,7 @@ const SingleProduct = ({ match, history }) => {
             />
 
             <div className="flex justify-between">
-              <h2>{product.title}</h2>
+              <h2 className="text-xl font-bold mt-1">{product.title}</h2>
               {user._id === product.postedBy._id && isAuthenticated && (
                 <div className="flex opacity-70">
                   <IconButton
@@ -82,7 +91,7 @@ const SingleProduct = ({ match, history }) => {
               )}
             </div>
             <p>{product.description}</p>
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full text-gray-300">
               <span>
                 By{" "}
                 <span className="font-mono tracking-tighter texl-lg">

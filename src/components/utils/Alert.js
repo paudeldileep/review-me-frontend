@@ -15,7 +15,7 @@ const Alert=(props)=>{
     },[props.children])
 
     
-    const alertStyle=type==='error'? 'text-red-600' : 'text-purple-600'
+    const alertStyle=type==='error'? 'text-red-600' : 'text-gray-200'
 
     const setTimer=(delay)=>setTimeout(() => setIsVisible(false), delay);
 

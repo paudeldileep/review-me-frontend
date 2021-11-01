@@ -10,7 +10,7 @@ const IconButton=({Icon,IconStyle,buttonText,onButtonClick})=>{
 
     return <button className="flex justify-center items-center" onClick={handleClick}>
         <Icon className={IconStyle} />
-        <span>{buttonText}</span>
+        <span className="text-gray-200">{buttonText}</span>
     </button>
 }
 

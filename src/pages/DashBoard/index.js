@@ -31,9 +31,9 @@ export const DashBoard = (props) => {
     response.data.map((post) => <ProductTile key={post._id} post={post} />);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 min-h-screen w-full mt-1">
+    <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 min-h-screen w-full mt-1 bg-gray-400">
       {/* left sidebar section */}
-      <div className=" pt-2 rounded-md">
+      <div className=" pt-2 rounded-md border-2 border-gray-300">
         <div className="togglePost mx-1 ">
           <button
             type="button"
@@ -46,7 +46,7 @@ export const DashBoard = (props) => {
         </div>
       </div>
       {/* main content section */}
-      <div className="sm:col-span-3 pt-2 rounded-md relative">
+      <div className="sm:col-span-3 pt-2 rounded-md relative border-2 border-gray-300 bg-gray-500">
         {isPosting && (
           <Fade top>
             <div className="absolute top-0 left-0 z-10 w-full h-screen rounded-md  bg-purple-400 bg-opacity-40 backdrop-filter backdrop-blur-md">

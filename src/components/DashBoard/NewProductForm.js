@@ -31,6 +31,11 @@ const NewProductForm = (props) => {
       return;
     }
 
+    setResponse({
+      ...response,
+      isLoading: true,
+    });
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", desc);
@@ -39,6 +44,11 @@ const NewProductForm = (props) => {
     axios
       .post("/product/new", formData)
       .then((res) => {
+        setResponse({
+          ...response,
+          isLoading: false,
+          status:res.data
+        });
         props.onPost();
         props.onPostComplete();
       })

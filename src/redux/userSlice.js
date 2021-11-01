@@ -1,12 +1,12 @@
-import axios from "../utils/axios";
-import setAuthToken from "../utils/setAuthToken";
+  import axios from "../utils/axios";
+  import setAuthToken from "../utils/setAuthToken";
 
-const initialState = {
-  userData: null,
-  isAuthenticated: false,
-  status: "idle",
-  error: null,
-};
+  const initialState = {
+    userData: null,
+    isAuthenticated: false,
+    status: "idle",
+    error: null,
+  };
 
 //reducer function
 export default function userReducer(state = initialState, action) {
@@ -68,7 +68,7 @@ export const userError = (error) => ({
   payload: error,
 });
 export const userSigningIn = () => ({ type: "user/userSigningIn" });
-export const userSignedIn = () => ({ type: "user/userSigningIn" });
+export const userSignedIn = () => ({ type: "user/userSignedIn" });
 export const userSigningUp = () => ({ type: "user/userSigningUp" });
 export const userSignedUp = () => ({ type: "user/userSignedUp" });
 export const userSignOut = () => ({ type: "user/userSignOut" });

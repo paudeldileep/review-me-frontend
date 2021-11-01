@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InlineLoader from "../../components/LoadingScreen/InlineLoader";
@@ -7,6 +8,9 @@ const SignUp = (props) => {
   //get signup status to show loading screen
   const signup_status = useSelector((state) => state.user.status);
   const signup_error = useSelector((state) => state.user.error);
+
+  console.log(signup_error);
+  //const renderedErrors=signup_error.map(err=><p>{err}</p>)
 
   const dispatch = useDispatch();
   const [firstname, setFirstname] = useState("");
@@ -41,7 +45,7 @@ const SignUp = (props) => {
   return (
     <div className="signup_form rounded-md w-96 min-w-min max-w-screen-md h-3/4 border-b-2 border-purple-700 shadow-2xl bg-gray-50 backdrop-filter backdrop-blur-lg bg-opacity-20">
       {signup_error && (
-            <p className="my-1 text-red-600 font-serif text-center">{signup_error}!!</p>
+            <p className="my-1 text-red-600 font-serif text-center">{signup_error.errors}!!</p>
           )}
       <h2 className="text-center font-mono text-3xl font-bold tracking-tighter mt-2 text-purple-900">
         Welcome Onboard
