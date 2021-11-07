@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
 
-    <div className="w-full h-14 border-b-2 border-purple-700 flex justify-between items-center bg-gray-300 rounded-md">
+    <div className="w-full h-14 border-b-2 border-purple-300 flex justify-between items-center bg-gray-100 rounded-md">
       {/* logo section */}
       <div><NavLink to="/"><img src="review-me-logo.png" alt="review-me-logo"/></NavLink></div>
       {/* link items section */}

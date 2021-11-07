@@ -23,7 +23,9 @@ const SignIn = (props) => {
       setPassword("");
     }
   };
-  const renderErrors=signin_error && signin_error.errors.map(err=><p className="my-1 text-xs text-red-600 font-serif text-center bg-gray-100 p-1">{err.msg}!!</p>)
+
+
+  const renderErrors=signin_error ? signin_error.errors && signin_error.errors.map(err=><p className="my-1 text-xs text-red-600 font-serif text-center bg-gray-100 p-1">{err.msg}!!</p>) : '';
 
   const canSignIn = Boolean(email) && Boolean(password);
   return (

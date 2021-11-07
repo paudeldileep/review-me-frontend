@@ -49,13 +49,13 @@ const Review = ({ productId }) => {
             value={newReview}
             onChange={handleReviewChange}
             placeholder="Post a new Review"
-            className="w-full px-2 py-1"
+            className="w-full px-2 py-1 rounded-md shadow-sm"
           ></textarea>
-          <button type="submit" className="px-2 py-1 w-full bg-purple-300 my-2 shadow-sm rounded-md">Submit Review</button>
+          <button type="submit" className="px-2 py-1 w-full bg-purple-300 hover:bg-purple-400 my-2 shadow-sm rounded-md">Submit Review</button>
           {postResponse && <Alert type="success" delay="3000">{postResponse}</Alert>}
         </form>
       </div>
-      <div className="mx-2">
+      <div className="mx-2 text-gray-600">
         {response.isLoading && <p>Loading Reviews...</p>}
         {content}
       </div>

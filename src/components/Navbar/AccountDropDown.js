@@ -1,6 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
 import { CogIcon, LogoutIcon } from "@heroicons/react/outline";
-import { UserIcon } from "@heroicons/react/solid";
+import { UserCircleIcon, UserIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,10 +23,10 @@ const AccountDropDown = () => {
         <div>
           <Menu.Button className="max-w-xs h-10 w-w-10 flex items-center justify-center text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
             <span className="text-purple-600 font-mono">{user.firstname}</span>
-            {user?.photo ? (
+            {user.photo ? (
               <img
                 className="h-6 w-6 rounded-full"
-                src={user?.photo}
+                src={user.photo}
                 alt={user.firstname}
               />
             ) : (
@@ -44,6 +44,22 @@ const AccountDropDown = () => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-300 ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+          <Menu.Item>
+              {({ active }) => (
+                <Link
+                  to={`/dashboard`}
+                  className={classNames(
+                    active ? "bg-gray-100" : "",
+                    "px-4 py-2 text-sm text-gray-700 w-full block"
+                  )}
+                >
+                  <p className="flex items-center justify-start">
+                    <UserCircleIcon className="h-5 w-5 text-purple-400 mr-1" />
+                    <span>Profile</span>
+                  </p>
+                </Link>
+              )}
+            </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <Link

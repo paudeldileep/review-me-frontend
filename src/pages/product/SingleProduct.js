@@ -61,10 +61,10 @@ const SingleProduct = ({ match, history }) => {
       {loading && <BasicLoader>Deleting Product</BasicLoader>}
       {/* wrapper */}
       {product ? (
-        <div className="flex flex-col w-11/12 mx-auto shadow-xl rounded-md md:flex-row bg-gray-600 border-2 border-gray-300 p-2">
+        <div className="flex flex-col w-11/12 mx-auto shadow-xl rounded-md md:flex-row bg-gray-100 border-2 border-gray-300 p-2">
           {/* product image  */}
 
-          <div className="h-full w-full md:w-1/2 relative text-gray-200">
+          <div className="h-full w-full md:w-1/2 relative text-gray-600">
             <img
               src={product.productImage}
               alt={product.title}
@@ -91,7 +91,7 @@ const SingleProduct = ({ match, history }) => {
               )}
             </div>
             <p>{product.description}</p>
-            <div className="flex justify-between items-center w-full text-gray-300">
+            <div className="flex justify-between items-center w-full text-gray-400">
               <span>
                 By{" "}
                 <span className="font-mono tracking-tighter texl-lg">

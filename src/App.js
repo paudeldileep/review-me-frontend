@@ -9,6 +9,7 @@ import {
 import Navbar from "./components/Navbar/Navbar";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import PublicRoute from "./components/routing/PublicRoute";
+import Footer from "./components/UI/Footer";
 
 import LogIn from "./pages/Account";
 
@@ -21,7 +22,7 @@ import UserProfile from "./pages/userProfile";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen w-full mx-1 bg-gray-400">
+      <div className="min-h-screen w-full mx-1 bg-gray-50">
         <Navbar />
         <Switch>
           <Route exact path="/" component={Index} />
@@ -35,6 +36,7 @@ function App() {
             <Redirect to="/" />
           </Route>
         </Switch>
+        <Footer/>
       </div>
     </Router>
   );
